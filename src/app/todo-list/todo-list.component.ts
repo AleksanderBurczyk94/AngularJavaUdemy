@@ -12,7 +12,7 @@ export class TodoListComponent {
 
   addTodo(todo: string): void {
     if(todo.length <= 3) {
-      alert('Zadanie powinno mieć co najmniej 4 znaki!');
+      alert('Zadanie powinno mieć co najmniej 4 znaki!!!');
       return;
     }
 
