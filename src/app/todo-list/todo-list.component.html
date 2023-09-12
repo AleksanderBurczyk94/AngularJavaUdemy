@@ -2,16 +2,20 @@
 <input type="text" #name class="form-control" name="todo">
 <button type="button" class="btn btn-primary mt-3" (click)="addTodo(name.value)">Dodaj zadanie</button>
 
+<app-alert *ngIf="errorMessage" [errorMessage]="errorMessage" (clearMessage)="clearErrorMessage()" ></app-alert>
+
 <div class="mt-5">
   <h4>Zadania:</h4>
-  <ul class="list-group todos-list">
+  <ul class="list-group todos-list" *ngIf="todos.length > 0 else noTask">
     <li class="list-group-item" *ngFor="let todo of todos; index as i">
       <input
         type="checkbox"
         class="form-check-input my-1"
         [checked]="todo.isComplete"
+        (change) = "changeTodoStatus(i)"
       >
-      <span class="todo-item">{{ i + 1 }}. {{ todo.name }}</span>
+      <span class="todo-item" [ngStyle]="{'text-decoration' : todo.isComplete ? 'line-through' : 'initial'} ">{{ i + 1 }}. {{ todo.name }}</span>
     </li>
   </ul>
+  <ng-template #noTask>Aktualnie brak zadań!</ng-template>
 </div>
